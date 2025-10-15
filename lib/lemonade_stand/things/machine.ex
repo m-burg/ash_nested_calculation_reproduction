@@ -1,11 +1,11 @@
-defmodule LemonadeStand.Things.Part do
+defmodule LemonadeStand.Things.Machine do
   use Ash.Resource,
     otp_app: :lemonade_stand,
     domain: LemonadeStand.Things,
     data_layer: AshPostgres.DataLayer
 
   postgres do
-    table "parts"
+    table "machines"
     repo LemonadeStand.Repo
   end
 
@@ -18,14 +18,10 @@ defmodule LemonadeStand.Things.Part do
   end
 
   relationships do
-    belongs_to :category, LemonadeStand.Things.Category do
-      public? true
-    end
-  end
+    has_many :exclusion_relationships, LemonadeStand.Things.MachineExcludedCategory
 
-  calculations do
-    calculate :suitable, :boolean, true do
-      public? true
+    many_to_many :excluded_categories, LemonadeStand.Things.Category do
+      join_relationship :exclusion_relationships
     end
   end
 end
