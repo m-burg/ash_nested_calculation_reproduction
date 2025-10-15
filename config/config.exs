@@ -1,6 +1,6 @@
 import Config
 
-config :lemonade_stand, ecto_repos: [LemonadeStand.Repo]
+config :lemonade_stand, ecto_repos: [LemonadeStand.Repo], ash_domains: [LemonadeStand.Things]
 
 config :ash,
   allow_forbidden_field_for_relationships_by_default?: true,
