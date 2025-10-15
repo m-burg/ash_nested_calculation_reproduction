@@ -9,6 +9,10 @@ defmodule LemonadeStand.Things.ComponentSubstitute do
     repo LemonadeStand.Repo
   end
 
+  actions do
+    defaults [:read]
+  end
+
   relationships do
     belongs_to :component, LemonadeStand.Things.Component do
       public? true

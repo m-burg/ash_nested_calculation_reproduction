@@ -9,6 +9,10 @@ defmodule LemonadeStand.Things.Component do
     repo LemonadeStand.Repo
   end
 
+  actions do
+    defaults [:read]
+  end
+
   attributes do
     uuid_primary_key :id
   end
@@ -19,5 +23,13 @@ defmodule LemonadeStand.Things.Component do
     end
 
     has_many :substitutes, LemonadeStand.Things.ComponentSubstitute
+  end
+
+  calculations do
+    calculate :suitable,
+              :boolean,
+              expr(part.suitable or exists(substitutes, part.suitable == true)) do
+      public? true
+    end
   end
 end

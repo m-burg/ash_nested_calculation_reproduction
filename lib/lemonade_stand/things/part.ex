@@ -9,7 +9,17 @@ defmodule LemonadeStand.Things.Part do
     repo LemonadeStand.Repo
   end
 
+  actions do
+    defaults [:read]
+  end
+
   attributes do
     uuid_primary_key :id
+  end
+
+  calculations do
+    calculate :suitable, :boolean, true do
+      public? true
+    end
   end
 end
