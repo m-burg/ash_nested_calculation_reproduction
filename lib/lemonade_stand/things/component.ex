@@ -28,8 +28,15 @@ defmodule LemonadeStand.Things.Component do
   calculations do
     calculate :suitable,
               :boolean,
-              expr(part.suitable or exists(substitutes, part.suitable == true)) do
+              expr(
+                part.suitable(machine_id: ^arg(:machine_id)) or
+                  exists(substitutes, part.suitable(machine_id: ^arg(:machine_id)) == true)
+              ) do
       public? true
+
+      argument :machine_id, :uuid do
+        allow_nil? false
+      end
     end
   end
 end

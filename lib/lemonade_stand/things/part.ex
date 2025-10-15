@@ -24,8 +24,19 @@ defmodule LemonadeStand.Things.Part do
   end
 
   calculations do
-    calculate :suitable, :boolean, true do
+    calculate :suitable,
+              :boolean,
+              expr(
+                not exists(
+                  LemonadeStand.Things.MachineExcludedCategory,
+                  machine_id == ^arg(:machine_id) && category_id == parent(category_id)
+                )
+              ) do
       public? true
+
+      argument :machine_id, :uuid do
+        allow_nil? false
+      end
     end
   end
 end
