@@ -3,5 +3,8 @@ defmodule LemonadeStand.Things do
     otp_app: :lemonade_stand
 
   resources do
+    resource LemonadeStand.Things.Component
+    resource LemonadeStand.Things.ComponentSubstitute
+    resource LemonadeStand.Things.Part
   end
 end
